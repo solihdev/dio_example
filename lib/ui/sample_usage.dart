@@ -18,8 +18,9 @@ class _SampleUsageState extends State<SampleUsage> {
       ),
       body: Consumer<ProductViewModel>(
         builder: (context,viewModel,child){
-          if(viewModel==null){
+          if(viewModel.productModel==null){
             return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Center(child: Text("No data Yet"),),
                 ElevatedButton(onPressed: () {
@@ -30,9 +31,9 @@ class _SampleUsageState extends State<SampleUsage> {
           }
           return Column(
             children: [
-              Text(viewModel.productModel!.id.toString()),
-              Text(viewModel.productModel!.name),
-              Text(viewModel.productModel!.price.toString()),
+              Text(viewModel.productModel![0].id.toString()),
+              Text(viewModel.productModel![0].name),
+              Text(viewModel.productModel![0].price.toString()),
             ],
           );
         },

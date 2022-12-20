@@ -5,12 +5,12 @@ import 'package:flutter/cupertino.dart';
 class ProductViewModel extends ChangeNotifier {
   ProductViewModel({required this.productRepository});
 
-  ProductModel? productModel;
+  List<ProductModel>? productModel;
 
   ProductRepository productRepository;
 
   fetchProduct() async {
-    productModel = (await productRepository.getAllProducts()) as ProductModel?;
+    productModel = await productRepository.getAllProducts() as List<ProductModel>;
     notifyListeners();
   }
 }
