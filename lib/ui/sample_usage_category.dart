@@ -1,24 +1,24 @@
-import 'package:dio_example/view_models/product_view_model.dart';
+import 'package:dio_example/view_models/category_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SampleUsage extends StatefulWidget {
-  const SampleUsage({Key? key}) : super(key: key);
+class SampleUsageCategory extends StatefulWidget {
+  const SampleUsageCategory({Key? key}) : super(key: key);
 
   @override
-  State<SampleUsage> createState() => _SampleUsageState();
+  State<SampleUsageCategory> createState() => _SampleUsageCategoryState();
 }
 
-class _SampleUsageState extends State<SampleUsage> {
+class _SampleUsageCategoryState extends State<SampleUsageCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Simple Usage"),
+        title: const Text("Simple Usage 2"),
       ),
-      body: Consumer<ProductViewModel>(
+      body: Consumer<CategoryViewModel>(
         builder: (context, viewModel, child) {
-          if (viewModel.productModel == null) {
+          if (viewModel.categoryModel== null) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -27,7 +27,7 @@ class _SampleUsageState extends State<SampleUsage> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      context.read<ProductViewModel>().fetchProduct();
+                      context.read<CategoryViewModel>().fetchCategory();
                     },
                     child: const Text("Get Data")),
               ],
@@ -35,7 +35,7 @@ class _SampleUsageState extends State<SampleUsage> {
           }
           return ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: viewModel.productModel!.length,
+              itemCount: viewModel.categoryModel!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(16),
@@ -65,10 +65,10 @@ class _SampleUsageState extends State<SampleUsage> {
                               width: 10,
                             ),
                             SizedBox(
-                              width: 200,
+                              width: 150,
                               height: 180,
                               child: Image.network(
-                                viewModel.productModel![index].imageUrl,
+                                viewModel.categoryModel![index].imageUrl,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -81,19 +81,22 @@ class _SampleUsageState extends State<SampleUsage> {
                                 SizedBox(
                                   width: 120,
                                   child: Text(
-                                    viewModel.productModel![index].name,
+                                    viewModel.categoryModel![index].name,
                                     style: const TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
                                 const SizedBox(
                                   height: 30,
                                 ),
-                                Text("Price - ${viewModel.productModel![index].price.toString()}",style: const TextStyle(
-                                  fontSize: 20
-                                ),),
+                                SizedBox(
+                                  width: 150,
+                                  child: Text("Created at - ${viewModel.categoryModel![index].createdAt.toString()}",style: const TextStyle(
+                                      fontSize: 20
+                                  ),),
+                                ),
                               ],
                             ),
                           ],

@@ -24,7 +24,7 @@ class ApiService extends ApiClient {
     try {
       Response response = await dio.get("${dio.options.baseUrl}/categories");
       if (response.statusCode == 200) {
-        return response.data.map((e) => CategoryModel.fromJson(e)).toList() ??
+        return (response.data as List).map((e) => CategoryModel.fromJson(e)).toList() ??
             [];
       }
     } catch (error) {
